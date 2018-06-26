@@ -59,7 +59,7 @@ def main():
 	#while ros is running, constantly update the database
 	#when client corresponds with this server, use these databases
 	#When subscribing to new kayaks add
-	#			k1 = dict(Temperature = reader#.temperature, Salinity = reader#.salinity, Latitude = reader#.latitude, Longitude = reader#.longitude, Depth = reader#.depth, x = reader#.x, y = reader#.y, z = reader#.z, w = reader#.w)
+	#			k# = dict(Temperature = reader#.temperature, Salinity = reader#.salinity, Latitude = reader#.latitude, Longitude = reader#.longitude, Depth = reader#.depth, x = reader#.x, y = reader#.y, z = reader#.z, w = reader#.w)
 	while not rospy.is_shutdown():
 		if reader0.temperature is not None and reader0.longitude is not None:
 			k0 = dict(Temperature = reader0.temperature, Salinity = reader1.salinity, Latitude = reader0.latitude, Longitude = reader0.longitude, Depth = reader0.depth, x = reader0.x, y = reader0.y, z = reader0.z, w = reader0.w)
