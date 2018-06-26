@@ -3,10 +3,10 @@ REU code: publish kayak data from simulation to TCP
 
 To be run with glider_kayak_sim.
 
-Run roscore
-Run launch file from glider_kayak_sim
-Run kayak_tcp.py from this package
-Use client to communicate with server started
+Run roscore  
+Run launch file from glider_kayak_sim  
+Run kayak_tcp.py from this package  
+Use client to communicate with server started  
 
 
 class KayakReader requires a number input, the number should correspond to the kayak you want to subscribe to
