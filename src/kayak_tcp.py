@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 import argparse
 import socket
 import rospy
@@ -47,6 +46,8 @@ def main():
 	rospy.init_node("kayak_tcp")
 	rate = rospy.Rate(.1)
 
+	t=time.time()
+
 	#initializes TCP server
 	tcp = TCP(mode='server')
 
@@ -62,9 +63,12 @@ def main():
 	#			k# = dict(Temperature = reader#.temperature, Salinity = reader#.salinity, Latitude = reader#.latitude, Longitude = reader#.longitude, Depth = reader#.depth, x = reader#.x, y = reader#.y, z = reader#.z, w = reader#.w)
 	while not rospy.is_shutdown():
 		if reader0.temperature is not None and reader0.longitude is not None:
-			k0 = dict(Temperature = reader0.temperature, Salinity = reader1.salinity, Latitude = reader0.latitude, Longitude = reader0.longitude, Depth = reader0.depth, x = reader0.x, y = reader0.y, z = reader0.z, w = reader0.w)
-			k1 = dict(Temperature = reader1.temperature, Salinity = reader1.salinity, Latitude = reader1.latitude, Longitude = reader1.longitude, Depth = reader1.depth, x = reader1.x, y = reader1.y, z = reader1.z, w = reader1.w)
+			k0 = dict(Time = t, Temperature = reader0.temperature, Salinity = reader1.salinity, Latitude = reader0.latitude, Longitude = reader0.longitude, Depth = reader0.depth, x = reader0.x, y = reader0.y, z = reader0.z, w = reader0.w)
+			k1 = dict(Time = t, Temperature = reader1.temperature, Salinity = reader1.salinity, Latitude = reader1.latitude, Longitude = reader1.longitude, Depth = reader1.depth, x = reader1.x, y = reader1.y, z = reader1.z, w = reader1.w)
 			
+			with open('data.yml', 'w') as outfile:
+				yaml.dump(k0, outfile, default_flow_style=False)
+
 			tcp.database['kayak_0']= yaml.dump(k0)
 			tcp.database['kayak_1']= yaml.dump(k1)
 	rate.sleep()
